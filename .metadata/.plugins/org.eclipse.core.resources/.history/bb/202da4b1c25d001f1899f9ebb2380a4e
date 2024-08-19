@@ -1,0 +1,5 @@
+package com.example.restApi;
+
+public class GreetingController {
+
+}
