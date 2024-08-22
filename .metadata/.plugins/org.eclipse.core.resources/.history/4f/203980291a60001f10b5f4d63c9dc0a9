@@ -29,22 +29,6 @@ public class MathController {
 		}
 		return convertToDouble(numberOne) - convertToDouble(numberTwo);
 	}
-	
-	public Double multiplication() {
-		
-	}
-	
-	public Double Division() {
-		
-	}
-	
-	public Double Avarege() {
-		
-	}
-	
-	public Double squareRoot() {
-		
-	}
 
 	private Double convertToDouble(String strNumber) {
 		if (strNumber == null) return 0D;

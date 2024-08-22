@@ -21,30 +21,6 @@ public class MathController {
 		}
 		return convertToDouble(numberOne) + convertToDouble(numberTwo);
 	}
-	
-	@RequestMapping(value = "/minus/{numberOne}/{numberTwo}", method = RequestMethod.GET)
-	public Double minus(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = numberTwo) String numberTwo) {
-		if (!IsNumeric(numberOne) || !IsNumeric(numberTwo)){
-			throw new UnsupportedMathOperationException("set a numeric value");
-		}
-		return convertToDouble(numberOne) - convertToDouble(numberTwo);
-	}
-	
-	public Double multiplication() {
-		
-	}
-	
-	public Double Division() {
-		
-	}
-	
-	public Double Avarege() {
-		
-	}
-	
-	public Double squareRoot() {
-		
-	}
 
 	private Double convertToDouble(String strNumber) {
 		if (strNumber == null) return 0D;
