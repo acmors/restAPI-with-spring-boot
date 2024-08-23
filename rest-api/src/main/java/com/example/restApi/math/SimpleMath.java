@@ -1,6 +1,5 @@
 package com.example.restApi.math;
 
-import com.example.restApi.converters.NumberConverter;
 
 public class SimpleMath {
 
