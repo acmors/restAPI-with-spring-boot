@@ -7,82 +7,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restApi.converters.NumberConverter;
 import com.example.restApi.exceptions.UnsupportedMathOperationException;
+import com.example.restApi.math.SimpleMath;
 
 @RestController
 public class MathController {
 	private static AtomicLong counter = new AtomicLong();
 	
+	private SimpleMath simpleMath = new SimpleMath();
+	
 	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double sum(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception 
 	{
-		if (!IsNumeric(numberOne) || !IsNumeric(numberTwo)){
+		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
 			throw new UnsupportedMathOperationException("set a numeric value");
 		}
-		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+		return simpleMath.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
 	}
 	
 	@RequestMapping(value = "/minus/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double minus(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) {
-		if (!IsNumeric(numberOne) || !IsNumeric(numberTwo)){
+		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
 			throw new UnsupportedMathOperationException("set a numeric value");
 		}
-		return convertToDouble(numberOne) - convertToDouble(numberTwo);
+		return simpleMath.minus(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
 	}
 	
 	@RequestMapping(value = "/multiplication/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double multiplication(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) {
-		if (!IsNumeric(numberOne) || !IsNumeric(numberTwo)){
+		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
 			throw new UnsupportedMathOperationException("set a numeric value");
 		}
-		return convertToDouble(numberOne) * convertToDouble(numberTwo);
+		return simpleMath.multiplication(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));;
 	}
 	
 	@RequestMapping(value = "/division/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double Division(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) {
-		if (!IsNumeric(numberOne) || !IsNumeric(numberTwo)){
+		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
 			throw new UnsupportedMathOperationException("set a numeric value");
 		}
-		return convertToDouble(numberOne) / convertToDouble(numberTwo);
+		return simpleMath.Division(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
 	}
 	
-	@RequestMapping(value = "/avarege/{numbers}", method = RequestMethod.GET)
-	public Double Avarege(@PathVariable(value = "numbers") String numbers) {
-		
-		String[] numberArr = numbers.split(",");
-		Double sum = 0.0;
-		Integer count = 0;
-		
-		for (String number : numberArr) {
-			
-			if (!IsNumeric(number)){
-				throw new UnsupportedMathOperationException("set a numeric value");
-			}
-			sum += convertToDouble(number);
-			count++;
-		}
-		
-		return sum / count;
-	}
-	
-	@RequestMapping(value = "/square_root/{numberOne}", method = RequestMethod.GET)
-	public Double squareRoot(@PathVariable(value = "numberOne") String numberOne) {
-		if (!IsNumeric(numberOne)){
+	@RequestMapping(value = "/avarege/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double Avarege(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception{
+		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
 			throw new UnsupportedMathOperationException("set a numeric value");
 		}
-		return Math.sqrt(convertToDouble(numberOne));
+	
+		return simpleMath.Avarege(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
+	}
+	
+	@RequestMapping(value = "/square_root/{number}", method = RequestMethod.GET)
+	public Double squareRoot(@PathVariable(value = "number") String number) {
+		if (!NumberConverter.IsNumeric(number)){
+			throw new UnsupportedMathOperationException("set a numeric value");
+		}
+		return simpleMath.squareRoot(NumberConverter.convertToDouble(number));
 	}
 
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null) return 0D;
-		String number = strNumber.replaceAll(",", "."); //-> converte toda virula que for inserida para um ponto;
-		if (IsNumeric(number)) return Double.parseDouble(number);
-		return null;
-	}
-
-	private boolean IsNumeric(String strNumeric) {
-		if (strNumeric == null) return false;
-		String number = strNumeric.replaceAll(",", ".");
-		return number.matches("[+-]?[0-9]*\\.?[0-9]+");
-	}
+	
 }

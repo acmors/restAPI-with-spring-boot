@@ -1,0 +1,9 @@
+package com.example.restApi.math;
+
+public class SimpleMath {
+
+	public SimpleMath() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
