@@ -2,27 +2,29 @@ package com.example.restApi.controllers;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restApi.converters.NumberConverter;
-import com.example.restApi.exceptions.UnsupportedMathOperationException;
-import com.example.restApi.math.SimpleMath;
+import com.example.model.Person;
+import com.example.services.PersonServices;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
-	private static AtomicLong counter = new AtomicLong();
 	
+	@Autowired
+	private PersonServices service;
 	
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
-	public Double sum(@PathVariable(value = "numberOne") String numberOne, @PathVariable(value = "numberTwo") String numberTwo) throws Exception 
+	@RequestMapping(value = "/{id}", 
+				method=RequestMethod.GET,
+				produces = MediaType.APPLICATION_JSON_VALUE)
+	public Person findById(@PathVariable(value = "id") String id) throws Exception 
 	{
-		if (!NumberConverter.IsNumeric(numberOne) || !NumberConverter.IsNumeric(numberTwo)){
-			throw new UnsupportedMathOperationException("set a numeric value");
-		}
-		return simpleMath.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
+		return service.findById(id);
 	}
 	
 }
