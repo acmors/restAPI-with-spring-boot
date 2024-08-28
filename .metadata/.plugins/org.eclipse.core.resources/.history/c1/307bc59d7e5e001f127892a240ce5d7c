@@ -1,5 +1,0 @@
-package com.example.restApi.exceptions;
-
-public class ExceptionResponse {
-
-}

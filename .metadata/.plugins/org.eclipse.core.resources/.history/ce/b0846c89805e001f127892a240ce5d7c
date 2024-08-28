@@ -1,9 +1,0 @@
-package com.example.restApi.exceptions.handler;
-
-public class CustomizedResponseEntityExceptionHandler {
-
-	public CustomizedResponseEntityExceptionHandler() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
