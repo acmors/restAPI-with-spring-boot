@@ -32,7 +32,6 @@ INDEX VERSION 1.134+C:\Users\marcos\Documents\programming\rest-api\.metadata\.pl
 2913438583.index
 1955791842.index
 3780852660.index
-3295419645.index
 345986617.index
 3898433264.index
 3562450558.index

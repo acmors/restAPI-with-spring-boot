@@ -1,0 +1,5 @@
+package com.example.restApi.repository;
+
+public interface PersonRepository {
+
+}
