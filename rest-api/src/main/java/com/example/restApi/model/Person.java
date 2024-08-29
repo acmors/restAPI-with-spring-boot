@@ -42,11 +42,11 @@ public class Person implements Serializable{
 		this.firstName = firstName;
 	}
 
-	public String getLasttName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLasttName(String lasttName) {
+	public void setLastName(String lasttName) {
 		this.lastName = lasttName;
 	}
 
