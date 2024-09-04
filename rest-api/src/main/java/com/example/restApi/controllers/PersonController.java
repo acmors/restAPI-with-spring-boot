@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restApi.model.Person;
+import com.example.restApi.model.PersonVO;
 import com.example.restApi.services.PersonServices;
 
 @RestController
@@ -28,27 +28,27 @@ public class PersonController {
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll() 
+	public List<PersonVO> findAll() 
 	{
 		return service.findAll();
 	}
 	
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person findById(@PathVariable(value = "id") Long id)
+	public PersonVO findById(@PathVariable(value = "id") Long id)
 	{
 		return service.findById(id);
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Person create(@RequestBody Person person)
+	public PersonVO create(@RequestBody PersonVO personVO)
 	{
-		return service.create(person);
+		return service.create(personVO);
 	}
 	
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public Person update(@RequestBody Person person)
+	public PersonVO update(@RequestBody PersonVO personVO)
 	{
-		return service.update(person);
+		return service.update(personVO);
 	}
 	
 	@DeleteMapping(value = "/{id}")

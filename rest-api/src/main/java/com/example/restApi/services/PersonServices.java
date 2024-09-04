@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.restApi.exceptions.ResourceNotFoundException;
-import com.example.restApi.model.Person;
+import com.example.restApi.model.PersonVO;
 import com.example.restApi.repository.PersonRepository;
 
 //essa anotation ajuda a não ficar instanciando classes por aí, basta criar a variavel
@@ -21,35 +21,35 @@ public class PersonServices {
 	@Autowired
 	PersonRepository repository;
 
-	public List<Person> findAll() 
+	public List<PersonVO> findAll() 
 	{
 		logger.info("finding all people!");
 		return repository.findAll();
 	}
 	
-	public Person findById(Long id) 
+	public PersonVO findById(Long id) 
 	{
 		logger.info("finding one person!");
 		return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("None of this ID!"));
 	}
 	
-	public Person create(Person person) 
+	public PersonVO create(PersonVO personVO) 
 	{
 		logger.info("creating one person!");
-		return repository.save(person);
+		return repository.save(personVO);
 	}
 	
-	public Person update(Person person) 
+	public PersonVO update(PersonVO personVO) 
 	{
 		logger.info("updating one person!");
-		var entity = repository.findById(person.getId()).orElseThrow(() -> new ResourceNotFoundException("None of this ID!"));
+		var entity = repository.findById(personVO.getId()).orElseThrow(() -> new ResourceNotFoundException("None of this ID!"));
 	
-		entity.setFirstName(person.getFirstName());
-		entity.setLastName(person.getLastName());
-		entity.setAddress(person.getAddress());
-		entity.setGender(person.getGender());
+		entity.setFirstName(personVO.getFirstName());
+		entity.setLastName(personVO.getLastName());
+		entity.setAddress(personVO.getAddress());
+		entity.setGender(personVO.getGender());
 		
-		return repository.save(person);
+		return repository.save(personVO);
 	}
 	
 	public void delete(Long id) 

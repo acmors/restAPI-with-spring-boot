@@ -1,9 +1,0 @@
-package com.example.restApi.converters;
-
-public class NumberConverter {
-
-	public NumberConverter() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
